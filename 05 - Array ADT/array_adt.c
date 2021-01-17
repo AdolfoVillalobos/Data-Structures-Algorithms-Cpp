@@ -107,12 +107,65 @@ int RBinarySearch(struct Array arr, int l, int h, int key){
 
 }
 
+
+int Sum(struct Array arr){
+  int total=0;
+  for (int i=0; i< arr.length; i++){
+    total = total+arr.A[i];
+  }
+  return total;
+}
+
+
+float AVG(struct Array arr){
+  float total= 0;
+  for (int i=0; i< arr.length; i++) {
+    total = total+arr.A[i];
+  }
+  total = total/arr.length;
+  return total;
+}
+
+int Get(struct Array arr, int index){
+  if (index>=0 && index < arr.length){
+    return arr.A[index];
+  }
+  return -1;
+}
+
+void Set(struct Array *arr, int index, int x){
+  if (index>=0 && index < arr->length){
+    arr->A[index] = x;
+  }
+}
+
+int Min(struct Array arr){
+  int min = arr.A[0];
+  int i;
+  for (i=1; i<arr.length; i++){
+    if (arr.A[i]<min){
+      min  = arr.A[i];
+    }
+  }
+  return min;
+}
+int Max(struct Array arr){
+  int max = arr.A[0];
+  int i;
+  for (i=1; i<arr.length; i++){
+    if (arr.A[i]>max){
+      max = arr.A[i];
+    }
+  }
+  return max;
+}
+
+
 int main(){
 
-  struct Array arr = {{2, 3, 4, 5, 6}, 10, 5};
-  
-  printf("%d\n ", RBinarySearch(arr, 0, arr.length-1, 9));
-
+  struct Array arr = {{2, 30, 4, 5, 6}, 10, 5};
+ 
+  printf("%f\n ", AVG(arr));
   Display(arr);
   return 0;
 }
