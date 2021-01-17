@@ -160,12 +160,22 @@ int Max(struct Array arr){
   return max;
 }
 
+void Reverse(struct Array *arr){
+  int i, j;
+  int temp;
+  for (i=0, j=arr->length-1; i<j; i++, j--){
+    temp = arr->A[i]; 
+    arr->A[i] = arr->A[j];
+    arr->A[j] = temp;
+  }
+
+}
 
 int main(){
 
   struct Array arr = {{2, 30, 4, 5, 6}, 10, 5};
  
-  printf("%f\n ", AVG(arr));
+  Reverse(&arr);
   Display(arr);
   return 0;
 }
