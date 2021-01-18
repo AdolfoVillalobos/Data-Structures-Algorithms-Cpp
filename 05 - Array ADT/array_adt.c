@@ -239,7 +239,7 @@ struct Array* Merge(struct Array *arr1, struct Array *arr2){
 }
 
 
-struct Array* Union(struct Array *arr1, struct Array *arr2){
+struct Array* UnionSorted(struct Array *arr1, struct Array *arr2){
   int i,j, k;
   i=j=k=0;
   struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
@@ -265,7 +265,28 @@ struct Array* Union(struct Array *arr1, struct Array *arr2){
   return arr3;
 }
 
-struct Array* Intersection(struct Array *arr1, struct Array *arr2){
+struct Array* Union(struct Array *arr1, struct Array *arr2){
+  int i, j, k;
+  k=0;
+  int search;
+  struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+  for (i=0; i<arr1->length; i++){
+    arr3->A[k++] = arr1->A[i];
+    printf("%d \n", arr1->A[i]);
+  }
+  for (j=0; j< arr2->length; j++){
+    search = BinarySearch(*arr1, arr2->A[j]);
+    if (search == -1){
+      arr3->A[k++] = arr2->A[j];
+    }
+  }
+  arr3->length = k;
+  arr3->size = 20;
+  return arr3;
+}
+
+struct Array* IntersectionSorted(struct Array *arr1, struct Array *arr2){
   int i,j, k;
   i=j=k=0;
   struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
@@ -285,7 +306,27 @@ struct Array* Intersection(struct Array *arr1, struct Array *arr2){
   return arr3;
 }
 
-struct Array* Difference(struct Array *arr1, struct Array *arr2){
+struct Array* Intersection(struct Array *arr1, struct Array *arr2){
+  int i,  k;
+  k=0;
+  int search;
+  struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+  for (i=0; i<arr1->length; i++){
+
+    search = BinarySearch(*arr2, arr1->A[i]);
+   if (search != -1){
+    arr3->A[k++] = arr1->A[i];
+   } 
+
+  }
+  arr3->length = k;
+  arr3->size = 20;
+  return arr3;
+}
+
+
+struct Array* DifferenceSorted(struct Array *arr1, struct Array *arr2){
   int i,j, k;
   i=j=k=0;
   struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
@@ -305,6 +346,25 @@ struct Array* Difference(struct Array *arr1, struct Array *arr2){
   }
   arr3->length = k;
   arr3->size=20;
+  return arr3;
+}
+
+struct Array* Difference(struct Array *arr1, struct Array *arr2){
+  int i,  k;
+  k=0;
+  int search;
+  struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+  for (i=0; i<arr1->length; i++){
+
+    search = BinarySearch(*arr2, arr1->A[i]);
+   if (search == -1){
+    arr3->A[k++] = arr1->A[i];
+   } 
+
+  }
+  arr3->length = k;
+  arr3->size = 20;
   return arr3;
 }
 
