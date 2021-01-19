@@ -7,7 +7,7 @@
 //  - Declare in the heap
 
 struct Array {
-  int A[10];
+  int *A;
   int size;
   int length;
 };
@@ -370,11 +370,52 @@ struct Array* Difference(struct Array *arr1, struct Array *arr2){
 
 int main(){
 
-  struct Array arr1 = {{2,  6, 10, 15, 25}, 10, 5};
-  struct Array arr2 = {{3, 6, 7, 15, 20  }, 10,5};
-  struct Array *arr3;
- 
-  arr3 =  Difference(&arr1, &arr2);
-  Display(*arr3);
+  struct Array arr1;
+  int x, index;
+  int ch;
+
+  printf(" Enter the size of the Array: \n");
+  scanf("%d", &arr1.size);
+
+  arr1.A = (int *)malloc(arr1.size*sizeof(int));
+  arr1.length = 0;
+  do {
+  printf("\n\n Menu\n\n");
+  printf("1. Insert\n");  
+  printf("2. Delete\n");  
+  printf("3. Search\n");  
+  printf("4. Sum\n");  
+  printf("5. Display\n");  
+  printf("6. Exit\n");  
+
+
+  printf("\nEnter your choice: \n");
+  scanf("%d", &ch);
+
+  switch(ch){
+    case 1:
+      printf("Enter an element and index: \n");
+      scanf("%d%d", &x, &index);
+      Insert(&arr1, index, x);
+      break;
+    case 2:
+      printf("Enter index: \n");
+      scanf("%d", &index);
+      x = Delete(&arr1, index);
+      printf("Deleted element is %d: \n", x);
+      break;
+    case 3:
+        printf("Enter element to search: \n");
+        scanf("%d", &x);
+        index = BinarySearch(arr1, x);
+        printf("Element index: %d \n", index);
+        break;
+    case 4:
+        printf("Sum is %d \n", Sum(arr1));
+        break;
+    case 5:
+        Display(arr1);
+  }
+} while(ch<6);
   return 0;
 }
